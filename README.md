@@ -1,5 +1,11 @@
 # Angular 4+ module for socket.io
 
+It is fork from https://github.com/bougarfaoui/ng-socket-io
+
+I have add Angular 5 SSR support and made the library with https://github.com/gonzofish/angular-librarian
+
+Also, I have add option `connectOnAppLoad` which allow socket to connect on app load (true by default).
+
 ## Install
 ``` npm install ng-socket-io ```
 

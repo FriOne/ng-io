@@ -1,6 +1,6 @@
 {
   "name": "ng-io",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Angular 4+ module for socket.io",
   "main": "./bundles/ng-io.umd.js",
   "module": "./ng-io.es5.js",
