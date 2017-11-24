@@ -1,7 +1,7 @@
-import { Inject } from '@angular/core';
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/share';
-import Socket = SocketIOClient.Socket;
 
 const io = require('socket.io/lib/client');
 
@@ -10,20 +10,32 @@ import { SOCKET_CONFIG_TOKEN } from './ng-io.module';
 
 export class SocketIo {
   subscribersCounter = 0;
-  ioSocket: Socket;
+  ioSocket: any;
   private initialized = false;
 
-  constructor(@Inject(SOCKET_CONFIG_TOKEN) private config: NgIoConfig) {}
+  constructor(
+    @Inject(SOCKET_CONFIG_TOKEN) private config: NgIoConfig,
+    @Inject(PLATFORM_ID) private platformId: any,
+  ) {}
 
   on(eventName: string, callback: Function) {
+    if (!this.ioSocket) {
+      return;
+    }
     this.ioSocket.on(eventName, callback);
   }
 
   once(eventName: string, callback: Function) {
+    if (!this.ioSocket) {
+      return;
+    }
     this.ioSocket.once(eventName, callback);
   }
 
   connect() {
+    if (isPlatformServer(this.platformId)) {
+      return {};
+    }
     if (!this.initialized) {
       const {url, options} = this.config;
       this.ioSocket = io(url, options);
@@ -34,22 +46,37 @@ export class SocketIo {
   }
 
   disconnect(close?: any) {
+    if (!this.ioSocket) {
+      return;
+    }
     return this.ioSocket.disconnect.apply(this.ioSocket, arguments);
   }
 
   emit(eventName: string, data?: any, callback?: Function) {
+    if (!this.ioSocket) {
+      return;
+    }
     return this.ioSocket.emit.apply(this.ioSocket, arguments);
   }
 
   removeListener(eventName: string, callback?: Function) {
+    if (!this.ioSocket) {
+      return;
+    }
     return this.ioSocket.removeListener.apply(this.ioSocket, arguments);
   }
 
   removeAllListeners(eventName?: string) {
+    if (!this.ioSocket) {
+      return;
+    }
     return this.ioSocket.removeAllListeners.apply(this.ioSocket, arguments);
   }
 
   fromEvent<T>(eventName: string): Observable<T> {
+    if (!this.ioSocket) {
+      return;
+    }
     this.subscribersCounter++;
     return Observable.create((observer: any) => {
       this.ioSocket.on(eventName, (data: T) => {
@@ -65,6 +92,9 @@ export class SocketIo {
 
   /* Creates a Promise for a one-time event */
   fromEventOnce<T>(eventName: string): Promise<T> {
+    if (!this.ioSocket) {
+      return;
+    }
     return new Promise<T>(resolve => this.once(eventName, resolve));
   }
 }

@@ -1,15 +1,16 @@
-import { APP_INITIALIZER, NgModule, ModuleWithProviders, InjectionToken } from '@angular/core';
+import { APP_INITIALIZER, PLATFORM_ID, NgModule, ModuleWithProviders, InjectionToken } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import { SocketIo } from './ng-io.service';
 import { NgIoConfig } from './ng-io-config';
 
-export function SocketFactory(config: NgIoConfig) {
-  return new SocketIo(config);
+export function SocketFactory(config: NgIoConfig, platformId: any) {
+  return new SocketIo(config, platformId);
 }
 
-export function AppInitFactory(socketIo: SocketIo, config: NgIoConfig) {
+export function AppInitFactory(socketIo: SocketIo, config: NgIoConfig, platformId: any) {
   return function() {
-    if (config.connectOnAppLoad) {
+    if (isPlatformBrowser(platformId) && config.connectOnAppLoad) {
       socketIo.connect();
     }
   };
@@ -27,12 +28,12 @@ export class NgIoModule {
         {
           provide: SocketIo,
           useFactory: SocketFactory,
-          deps: [SOCKET_CONFIG_TOKEN],
+          deps: [SOCKET_CONFIG_TOKEN, PLATFORM_ID],
         },
         {
           provide: APP_INITIALIZER,
           useFactory: AppInitFactory,
-          deps: [SocketIo, SOCKET_CONFIG_TOKEN],
+          deps: [SocketIo, SOCKET_CONFIG_TOKEN, PLATFORM_ID],
           multi: true
         }
       ]
