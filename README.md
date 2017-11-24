@@ -7,7 +7,10 @@ I have add Angular 5 SSR support and made the library with https://github.com/go
 Also, I have add option `connectOnAppLoad` which allow socket to connect on app load (true by default).
 
 ## Install
-``` npm install ng-socket-io ```
+```
+npm install socket.io
+npm install ng-socket-io
+```
 
 ## How to use
 
