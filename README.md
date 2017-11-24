@@ -6,6 +6,8 @@ I have add Angular 5 SSR support and made the library with https://github.com/go
 
 Also, I have add option `connectOnAppLoad` which allow socket to connect on app load (true by default).
 
+Here is [working example](https://github.com/FriOne/ng-universal-with-socket-io) with universal
+
 ## Install
 ```
 npm install ng-socket-io
