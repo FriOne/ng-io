@@ -25,6 +25,7 @@ const doRollup = (libName, dirs) => {
       'rxjs/Observable',
       'rxjs/Subscription',
       'socket.io',
+      'socket.io-client',
     ],
     globals: {
       '@angular/common': 'ng.common',

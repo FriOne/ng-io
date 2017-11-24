@@ -3,7 +3,7 @@ import { isPlatformServer } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/share';
 
-const io = require('socket.io/lib/client');
+import io from 'socket.io-client';
 
 import { NgIoConfig } from './ng-io-config';
 import { SOCKET_CONFIG_TOKEN } from './ng-io.module';

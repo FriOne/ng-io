@@ -8,7 +8,6 @@ Also, I have add option `connectOnAppLoad` which allow socket to connect on app 
 
 ## Install
 ```
-npm install socket.io
 npm install ng-socket-io
 ```
 
