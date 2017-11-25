@@ -37,7 +37,7 @@ export class SocketIo {
       return {};
     }
     if (!this.initialized) {
-      const {url, options} = this.config;
+      const {url = '', options} = this.config;
       this.ioSocket = io(url, options);
     } else {
       this.ioSocket = this.ioSocket.connect();

@@ -10,7 +10,7 @@ export function SocketFactory(config: NgIoConfig, platformId: any) {
 
 export function AppInitFactory(socketIo: SocketIo, config: NgIoConfig, platformId: any) {
   return function() {
-    if (isPlatformBrowser(platformId) && config.connectOnAppLoad) {
+    if (isPlatformBrowser(platformId) && (config.connectOnAppLoad || config.connectOnAppLoad === undefined)) {
       socketIo.connect();
     }
   };
@@ -24,7 +24,7 @@ export class NgIoModule {
     return {
       ngModule: NgIoModule,
       providers: [
-        {provide: SOCKET_CONFIG_TOKEN, useValue: {url: '', connectOnAppLoad: true, ...config}},
+        {provide: SOCKET_CONFIG_TOKEN, useValue: config},
         {
           provide: SocketIo,
           useFactory: SocketFactory,
