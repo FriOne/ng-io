@@ -10,7 +10,7 @@ Here is [working example](https://github.com/FriOne/ng-universal-with-socket-io)
 
 ## Install
 ```
-npm install ng-socket-io
+npm install ng-io
 ```
 
 ## How to use
