@@ -1,6 +1,6 @@
 # Angular 4+ module for socket.io
 
-It is fork from https://github.com/bougarfaoui/ng-socket-io
+It is fork from https://github.com/bougarfaoui/ng-io
 
 I have add Angular 5 SSR support and made the library with https://github.com/gonzofish/angular-librarian
 
@@ -47,7 +47,7 @@ The ```NgIoModule``` provides now a configured ```SocketIo``` service that can b
 
 ```typescript
 import { Injectable } from '@angular/core';
-import { SocketIo } from 'ng-socket-io';
+import { SocketIo } from 'ng-io';
 
 @Injectable()
 export class ChatService {
@@ -72,7 +72,7 @@ In this case we do not configure the ```NgIoModule``` directly using ```forRoot`
 
 ```typescript
 import { Injectable, NgModule } from '@angular/core';
-import { SocketIo } from 'ng-socket-io';
+import { SocketIo } from 'ng-io';
 
 @Injectable()
 export class SocketOne extends SocketIo {
@@ -147,14 +147,14 @@ If you have multiple subscriptions to an Observable only the last unsubscription
 
 ##### Example
 
-You can also see this [example](https://github.com/bougarfaoui/ng-socket-io/tree/master/examples/chat-app) with express.js.
+You can also see this [example](https://github.com/bougarfaoui/ng-io/tree/master/examples/chat-app) with express.js.
 
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
-import { NgIoModule, NgIoConfig, SocketIo} from 'ng-socket-io';
+import { NgIoModule, NgIoConfig, SocketIo} from 'ng-io';
 
 const config: NgIoConfig = { url: 'http://localhost:8988', options: {} };
 
