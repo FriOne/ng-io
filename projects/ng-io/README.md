@@ -2,6 +2,8 @@
 
 It is fork from https://github.com/bougarfaoui/ng-io
 
+In case you have issue with global-object error see [this issue](https://github.com/FriOne/ng-io/issues/4)
+
 I have add Angular 5 SSR support and made the library with https://github.com/gonzofish/angular-librarian
 
 Also, I have add option `connectOnAppLoad` which allow socket to connect on app load (true by default).
